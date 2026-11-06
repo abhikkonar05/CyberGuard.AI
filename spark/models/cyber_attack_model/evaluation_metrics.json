@@ -1,0 +1,14 @@
+{
+  "accuracy": 0.9991,
+  "precision": 0.9991,
+  "recall": 0.9991,
+  "f1_score": 0.9991,
+  "sample_size": 15000,
+  "classes": [
+    "Benign (Normal)",
+    "Brute Force",
+    "DDoS Attack",
+    "DoS Attack",
+    "Botnet Activity"
+  ]
+}

@@ -1,0 +1,41 @@
+services:
+  # ----------------------------------------------------
+  # 1. Django REST Framework Backend Service (Render Web Service)
+  # ----------------------------------------------------
+  - type: web
+    name: cyberguard-backend
+    runtime: python
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt"
+    startCommand: "gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 120"
+    healthCheckPath: /api/health/
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        value: "localhost,127.0.0.1,0.0.0.0,*.onrender.com"
+      - key: CORS_ALLOWED_ORIGINS
+        value: "http://localhost:5173,https://cyberguard-frontend.onrender.com"
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+
+  # ----------------------------------------------------
+  # 2. React Frontend Static Site (Render Static Site)
+  # ----------------------------------------------------
+  - type: static
+    name: cyberguard-frontend
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    staticPublishPath: ./dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: "https://cyberguard-backend.onrender.com/api"
+

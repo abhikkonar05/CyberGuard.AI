@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.env
+.env
+venv/
+env/
+.venv/
+
+# Spark & Big Data
+dataset/
+spark/data/raw/*.csv
+spark/checkpoints/
+spark/streaming/data_stream/
+spark/logs/*.log
+metastore_db/
+derby.log
+
+# Node & Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Django
+backend/logs/*.log
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/data/predictions/*.json
+backend/data/predictions/*.csv
+
+# IDE & OS
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+.DS_Store
+
